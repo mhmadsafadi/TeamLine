@@ -1,0 +1,55 @@
+{
+  "Navbar": {
+    "Logo":"تيم لاين",
+    "signup": "إنشاء حساب"
+  },
+  "LandingPage": {
+    "Hero": {
+      "title": "نظّم فريقك، <gradient>أنجز أكثر.</gradient>",
+      "description": "تيم لاين — المنصة الاحترافية لإدارة المشاريع وتوزيع المهام ومتابعة الفريق بكل سهولة.",
+      "btn": "جرّب المنصة الآن"
+    }
+  },
+  "Auth": {
+    "Login": {
+      "title": "تسجيل الدخول",
+      "description": "أهلاً بعودتك! يرجى تسجيل الدخول إلى حسابك.",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "btn": "تسجيل الدخول",
+      "forgotPassword": "هل نسيت كلمة المرور؟"
+    },
+    "Signup": {
+      "tabTitle":"إنشاء حساب",
+      "title": "إنشاء حساب",
+      "description": "احصل على وصول كامل لمنصة تيم لاين وابدأ رحلتك مع فريقك.",
+      "firstName": "الاسم الاول",
+      "lastName": "الاسم الثاني",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "btn": "إنشاء حساب"
+    }
+  },
+
+  "Dashboard": {
+    "sidebar": {
+      "home": "",
+      "projects": "",
+      "tasks": "",
+      "team": "",
+      "settings": ""
+    }
+  },
+
+  "Common": {
+    "loading": "",
+    "error": "",
+    "save": "",
+    "cancel": "",
+    "delete": "",
+    "edit": "",
+    "confirm": ""
+  }
+    
+}

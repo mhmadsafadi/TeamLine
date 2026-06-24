@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@utility container {
+  margin-inline: auto;
+}
+
+@theme {
+  --color-main: #6542f4;
+  --color-secondary: #e12afb;
+}

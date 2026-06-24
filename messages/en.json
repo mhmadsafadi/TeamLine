@@ -1,0 +1,54 @@
+{
+  "Navbar": {
+    "Logo":"TeamLine",
+    "signup": "Sign Up"
+  },
+  "LandingPage": {
+    "Hero": {
+      "title": "Organize your team, <gradient>accomplish more.</gradient>",
+      "description": "TeamLine — The professional platform for managing projects, distributing tasks, and monitoring the team with ease.",
+      "btn": "Start for Free"
+    }
+  },
+  "Auth": {
+    "Login": {
+      "title": "Login",
+      "description": "Welcome back! Please Login to your account.",
+      "email": "Enter Your Email",
+      "password": "Enter Your Password",
+      "btn": "Login",
+      "forgotPassword": "Forget Password?"
+    },
+    "Signup": {
+      "tabTitle":"SignUp",
+      "title": "Create an Account",
+      "description": "Get full access to TeamLine and start your journey with your team.",
+      "firstName": "Enter Your First Name",
+      "lastName": "Enter Your Last Name",
+      "email": "Enter Your Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "btn": "Create Account"
+    }
+  },
+
+  "Dashboard": {
+    "sidebar": {
+      "home": "",
+      "projects": "",
+      "tasks": "",
+      "team": "",
+      "settings": ""
+    }
+  },
+
+  "Common": {
+    "loading": "",
+    "error": "",
+    "save": "",
+    "cancel": "",
+    "delete": "",
+    "edit": "",
+    "confirm": ""
+  }
+}
