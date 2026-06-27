@@ -8,6 +8,29 @@
       "title": "Organize your team, <gradient>accomplish more.</gradient>",
       "description": "TeamLine — The professional platform for managing projects, distributing tasks, and monitoring the team with ease.",
       "btn": "Start for Free"
+    },
+    "Features": {
+      "label": "Features",
+      "title": "Everything your team needs to stay aligned",
+      "description": "Plan, assign, and track work in one clean bilingual workspace.",
+      "items": {
+        "boards": {
+          "title": "Project Boards",
+          "description": "Organize every project into clear boards, stages, and task lists so your team always knows what comes next."
+        },
+        "ownership": {
+          "title": "Task Ownership",
+          "description": "Assign tasks, set priorities, and keep responsibilities visible across the whole team."
+        },
+        "progress": {
+          "title": "Team Progress",
+          "description": "Track work status, completion progress, and recent activity without switching between tools."
+        },
+        "bilingual": {
+          "title": "Bilingual Workspace",
+          "description": "Work comfortably in Arabic or English with layouts that feel natural in both directions."
+        }
+      }
     }
   },
   "Auth": {
@@ -33,13 +56,26 @@
   },
 
   "Dashboard": {
+    "navbar": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "signout": "Sign out"
+    },
     "sidebar": {
-      "home": "",
-      "projects": "",
-      "tasks": "",
-      "team": "",
-      "settings": ""
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "tasks": "My Tasks",
+      "team": "Team",
+      "settings": "Settings"
     }
+  },
+  "Validation": {
+    "firstNameMin": "First name must be at least 2 characters",
+    "lastNameMin": "Last name must be at least 2 characters",
+    "emailInvalid": "Invalid email address",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "passwordRequired": "Password is required"
   },
 
   "Common": {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
+import { Navbar } from "@/components/Navbar";
 
 const AuthLayout = ({ children }) => {
   const t = useTranslations("Auth");
@@ -12,6 +13,8 @@ const AuthLayout = ({ children }) => {
   const isLogin = pathname.includes("/login");
 
   return (
+    <>
+    <Navbar />
     <div className="container min-h-screen mt-10 px-3">
       {/* Tab */}
       <div className="flex justify-center mb-10">
@@ -41,6 +44,7 @@ const AuthLayout = ({ children }) => {
 
       {children}
     </div>
+    </>
   );
 };
 

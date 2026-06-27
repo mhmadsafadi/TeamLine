@@ -1,6 +1,5 @@
 import { Almarai, Poppins } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
@@ -62,9 +61,8 @@ export default async function RootLayout({ children, params }) {
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
         className={`${locale === 'ar' ? almarai.className : poppins.className} h-full antialiased`}
     >
-      <body className="min-h-full flex h-[5000px] flex-col bg-linear-to-r from-[#ffc6e5]/50 via-gray-50 to-main/25">
+      <body className="min-h-full flex h-[5000px] flex-col bg-linear-to-r from-secondary/20 via-gray-50 to-main/25">
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
           <main>{children}</main>
         </NextIntlClientProvider>
       </body>
