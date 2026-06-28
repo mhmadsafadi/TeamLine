@@ -1,7 +1,8 @@
 {
   "Navbar": {
-    "Logo":"تيم لاين",
-    "signup": "إنشاء حساب"
+    "Logo": "تيم لاين",
+    "signup": "إنشاء حساب",
+    "dashboard": "لوحة التحكم"
   },
   "LandingPage": {
     "Hero": {
@@ -43,7 +44,7 @@
       "forgotPassword": "هل نسيت كلمة المرور؟"
     },
     "Signup": {
-      "tabTitle":"إنشاء حساب",
+      "tabTitle": "إنشاء حساب",
       "title": "إنشاء حساب",
       "description": "احصل على وصول كامل لمنصة تيم لاين وابدأ رحلتك مع فريقك.",
       "firstName": "الاسم الاول",
@@ -52,9 +53,13 @@
       "password": "كلمة المرور",
       "confirmPassword": "تأكيد كلمة المرور",
       "btn": "إنشاء حساب"
+    },
+    "Social": {
+      "continueWithGoogle": "المتابعة باستخدام Google",
+      "continueWithGithub": "المتابعة باستخدام GitHub",
+      "or": "أو"
     }
   },
-
   "Dashboard": {
     "navbar": {
       "profile": "الملف الشخصي",
@@ -77,7 +82,6 @@
     "passwordMismatch": "كلمة المرور غير متطابقة",
     "passwordRequired": "كلمة المرور مطلوبة"
   },
-
   "Common": {
     "loading": "",
     "error": "",
@@ -87,5 +91,4 @@
     "edit": "",
     "confirm": ""
   }
-    
 }

@@ -3,13 +3,22 @@
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/lib/lib/validations/auth";
+import { loginSchema } from "@/lib/validations/auth";
 import AuthTitleHeader from "../components/AuthTitleHeader";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+import { useState } from "react";
 import Link from "next/link";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import SocialAuthButtons from "../components/SocialAuthButtons";
 
 const LoginPage = () => {
   const t = useTranslations("Auth");
   const v = useTranslations("Validation");
+  const [serverError, setServerError] = useState("");
+  const router = useRouter();
+  const locale = useLocale();
 
   const {
     register,
@@ -19,8 +28,21 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema(v)),
   });
 
-  const onSubmit = async (data) => {
-    console.log(data); // لاحقاً نربطه بـ Supabase
+  const onSubmit = async (formData) => {
+    setServerError("");
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      setServerError(error.message);
+      return;
+    }
+    router.refresh();
+    router.push(`/${locale}/dashboard`);
   };
 
   return (
@@ -65,22 +87,36 @@ const LoginPage = () => {
 
         {/* Forgot Password */}
         <Link
-          href="/forgot-password"
+          href={`/${locale}/forgot-password`}
           className="block text-sm mb-5 font-medium text-main hover:underline"
         >
           {t("Login.forgotPassword")}
         </Link>
 
+        {/* Server Error */}
+        {serverError && (
+          <p className="mb-4 text-sm text-red-500 bg-red-50 px-4 py-2 rounded-md">
+            ❌ {serverError}
+          </p>
+        )}
+
         {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-white bg-main cursor-pointer px-5 py-2 hover:bg-main/10 hover:text-main rounded-md transition disabled:opacity-50"
+          className="flex items-center justify-center gap-2 text-white bg-main cursor-pointer px-5 py-2 hover:bg-main/10 hover:text-main rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed w-full"
         >
-          {isSubmitting ? "..." : t("Login.btn")}
+          {isSubmitting ? (
+            <div className="flex items-center gap-2">
+              <LoadingSpinner size={4} color="white" />
+              {locale === "ar" ? "جارٍ التحميل..." : "Loading..."}
+            </div>
+          ) : (
+            t("Login.btn") // أو t("Signup.btn")
+          )}
         </button>
-
       </form>
+      <SocialAuthButtons />
     </div>
   );
 };

@@ -1,10 +1,19 @@
+"use client";
+
+import { useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthStore } from "@/store/authStore";
 
 const Hero = () => {
   const t = useTranslations("LandingPage.Hero");
   const locale = useLocale();
+  const { user, fetchUser } = useAuthStore();
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <div className="container my-14 md:my-20 text-center space-y-3 md:space-y-5">
@@ -20,7 +29,7 @@ const Hero = () => {
       <p className="text-lg md:text-2xl">{t("description")}</p>
 
       <Link
-        href="/signup"
+        href={user ? `/${locale}/dashboard` : `/${locale}/signup`}
         className="mx-auto group bg-main text-white py-3 px-5 rounded-lg text-lg flex items-center w-fit gap-2 transition-shadow duration-3 hover:shadow-lg shadow-main/40"
       >
         <span>{t("btn")}</span>
@@ -34,11 +43,7 @@ const Hero = () => {
           strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`transform transition-transform duration-300 ${
-            locale === "ar"
-              ? "group-hover:-translate-x-2"
-              : "group-hover:translate-x-2"
-          }`}
+          className={`transform transition-transform duration-300 ${locale === "ar" ? "group-hover:-translate-x-2" : "group-hover:translate-x-2"}`}
         >
           {locale === "ar" ? (
             <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -48,9 +53,8 @@ const Hero = () => {
         </svg>
       </Link>
 
-      {/* الصورة */}
       <div className="w-full mx-auto mt-12 px-2 md:px-6 lg:px-0">
-        <div className="bg-white p-2 md:p-3 rounded-2xl shadow-2xl ">
+        <div className="bg-white p-2 md:p-3 rounded-2xl shadow-2xl">
           <Image
             src={locale === "ar" ? "/hero-img-ar.png" : "/hero-img-en.png"}
             alt="واجهة مستخدم المنصة الذكية"

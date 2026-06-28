@@ -3,13 +3,21 @@
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema } from "@/lib/lib/validations/auth";
+import { signupSchema } from "@/lib/validations/auth";
 import AuthTitleHeader from "../components/AuthTitleHeader";
-
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+import { useState } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import SocialAuthButtons from "../components/SocialAuthButtons";
 
 const SignupPage = () => {
   const t = useTranslations("Auth");
   const v = useTranslations("Validation");
+  const [serverError, setServerError] = useState("");
+  const router = useRouter();
+  const locale = useLocale();
 
   const {
     register,
@@ -19,15 +27,41 @@ const SignupPage = () => {
     resolver: zodResolver(signupSchema(v)),
   });
 
-  const onSubmit = async (data) => {
-    console.log(data); // لاحقاً نربطه بـ Supabase
-  };
+
+  const onSubmit = async (formData) => {
+  setServerError("");
+  const supabase = createClient();
+
+  const { data: authData, error } = await supabase.auth.signUp({
+    email: formData.email,
+    password: formData.password,
+    options: {
+      data: {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        full_name: `${formData.firstName} ${formData.lastName}`,
+      },
+    },
+  });
+
+  if (error) {
+    setServerError(error.message);
+    return;
+  }
+
+  if (authData?.user?.identities?.length === 0) {
+    setServerError("User already registered");
+    return;
+  }
+  router.refresh();
+  router.push(`/${locale}/dashboard`);
+};
 
   return (
     <div className="max-w-md mx-auto">
       <AuthTitleHeader namespace="Auth.Signup" />
       <form onSubmit={handleSubmit(onSubmit)}>
-        
+
         <div className="grid md:grid-cols-2 md:gap-6">
           {/* First Name */}
           <div className="relative z-0 w-full mb-5 group">
@@ -115,16 +149,30 @@ const SignupPage = () => {
           )}
         </div>
 
+        {/* Server Error */}
+        {serverError && (
+          <p className="mb-4 text-sm text-red-500 bg-red-50 px-4 py-2 rounded-md">
+            ❌ {serverError}
+          </p>
+        )}
+
         {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-white bg-main cursor-pointer px-5 py-2 hover:bg-main/10 hover:text-main rounded-md transition disabled:opacity-50"
+          className="flex items-center justify-center gap-2 text-white bg-main cursor-pointer px-5 py-2 hover:bg-main/10 hover:text-main rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed w-full"
         >
-          {isSubmitting ? "..." : t("Signup.btn")}
+          {isSubmitting ? (
+            <div className="flex items-center gap-2">
+              <LoadingSpinner size={4} color="white" />
+              {locale === "ar" ? "جارٍ التحميل..." : "Loading..."}
+            </div>
+          ) : (
+            t("Signup.btn") // أو t("Signup.btn")
+          )}
         </button>
-
       </form>
+      <SocialAuthButtons />
     </div>
   );
 };
