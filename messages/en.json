@@ -32,6 +32,28 @@
           "description": "Work comfortably in Arabic or English with layouts that feel natural in both directions."
         }
       }
+    },
+    "HowItWorks": {
+      "label": "How it works",
+      "title": "Start organizing your team in minutes",
+      "description": "Create your team workspace, add projects, and turn work into clear tasks your team can follow.",
+      "steps": {
+        "team": {
+          "number": "01",
+          "title": "Create your team",
+          "description": "Set up a shared space for your members, projects, and daily workflow."
+        },
+        "project": {
+          "number": "02",
+          "title": "Add your projects",
+          "description": "Break work into organized boards with stages that match your process."
+        },
+        "tasks": {
+          "number": "03",
+          "title": "Assign and track tasks",
+          "description": "Give every task an owner, priority, and status so progress stays visible."
+        }
+      }
     }
   },
   "Auth": {

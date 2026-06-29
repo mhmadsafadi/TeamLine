@@ -1,7 +1,31 @@
 import { useTranslations } from "next-intl";
+import { createClient } from "@/lib/supabase/client";
+import { useLocale } from "next-intl";
 
 const SocialAuthButtons = () => {
     const t = useTranslations("Auth.Social");
+    const locale = useLocale();
+
+    const handleGoogleLogin = async () => {
+        const supabase = createClient();
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: `${window.location.origin}/${locale}/auth/callback`,
+            },
+        })
+        if (error) console.error(error.message);
+    }
+    const handleGithubLogin = async () => {
+        const supabase = createClient();
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "github",
+            options: {
+            redirectTo: `${window.location.origin}/${locale}/auth/callback`,
+            },
+        });
+        if (error) console.error(error.message);
+    }
   return (
     <div className="flex flex-col gap-3 w-full">
         <div className="relative flex items-center mt-6 mb-3">
@@ -10,7 +34,7 @@ const SocialAuthButtons = () => {
             <div className="flex-grow border-t border-gray-300"></div>
         </div>
         {/* Google Button */}
-        <button className="flex items-center justify-center gap-3 w-full px-5 py-2 cursor-pointer rounded-md font-semibold text-gray-700 bg-gray-200 hover:bg-gray-300 transition">
+        <button onClick={handleGoogleLogin} className="flex items-center justify-center gap-3 w-full px-5 py-2 cursor-pointer rounded-md font-medium border border-white text-gray-700 bg-gray-200 hover:border-[#ea4335] hover:bg-gray-50 transition">
             <svg viewBox="0 0 24 24" className="size-6">
                 <path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.4-.2-2H12v3.8h6a5.1 5.1 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.6 3.3-7.8Z" />
                 <path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.9l-3.5-2.7c-1 .6-2.1 1-3.8 1a6.5 6.5 0 0 1-6.1-4.5H2.3v2.8A11 11 0 0 0 12 23Z" />
@@ -21,7 +45,7 @@ const SocialAuthButtons = () => {
         </button>
 
         {/* GitHub Button */}
-        <button className="flex items-center justify-center gap-3 w-full px-5 py-2 cursor-pointer rounded-md font-semibold text-gray-700 bg-gray-200 hover:bg-gray-300 transition">
+        <button onClick={handleGithubLogin} className="flex items-center justify-center gap-3 w-full px-5 py-2 cursor-pointer rounded-md font-medium border border-white text-gray-700 bg-gray-200 hover:border-black hover:bg-gray-50 transition">
             <svg viewBox="0 0 98 96" className="size-6" fill="currentColor" aria-hidden="true">
                 <path
                     fillRule="evenodd"

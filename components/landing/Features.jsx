@@ -1,17 +1,21 @@
 import { useTranslations } from "next-intl";
+import SectionHeader from "../SectionHeader";
 
 const Features = () => {
   const t = useTranslations("LandingPage.Features");
   const features = ["boards", "ownership", "progress", "bilingual"];
 
   return (
-    <section className="mt-10 py-10 bg-linear-to-r from-secondary/50 via-gray-50 to-main/75">
-      <div className="container text-c px-3 sm:px-0">
-        <div className="mb-7 text-white">
-          {/* <h1 className="text-3xl font-bold mb-3 rtl:text-secondary ltr:text-main">{t("label")}</h1> */}
-          <h2 className="text-2xl ">{t("title")}</h2>
-          <p>{t("description")}</p>
-        </div>
+    <section className="mt-10 py-10 bg-linear-to-r from-secondary/50 to-main/75">
+      <div className="container text-center px-3 sm:px-0">
+        <SectionHeader
+            label={t("label")}
+            title={t("title")}
+            description={t("description")}
+            labelClassName="text-white"
+            titleClassName="text-white"
+            descriptionClassName="text-gray-200"
+        />
 
          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {features.map((key) => (
