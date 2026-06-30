@@ -1,5 +1,3 @@
-"use client";
-
 export default function SocialModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 

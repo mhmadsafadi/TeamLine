@@ -11,11 +11,10 @@ const Logo = () => {
       <Image
         src="/logo-1.png"
         alt="TeamLine Logo"
-        width={130}
+        width={100}
         height={100}
-        priority
       />
-      <span className="text-xs font-semibold tracking-widest text-main">
+      <span className="text-md font-semibold tracking-widest text-main">
         {t("Logo")}
       </span>
     </Link>
