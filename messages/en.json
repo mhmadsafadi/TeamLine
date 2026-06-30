@@ -54,6 +54,41 @@
           "description": "Give every task an owner, priority, and status so progress stays visible."
         }
       }
+    },
+    "ProjectFlow": {
+      "label": "Project flow",
+      "title": "See every task move from idea to done",
+      "description": "Follow every project from idea to done with connected stages, task owners, and progress your team can understand at a glance."
+    },
+    "UseCases": {
+      "label": "Use cases",
+      "title": "Built for teams that move work forward",
+      "description": "Whether you design, build, market, or study together, TeamLine keeps everyone aligned around clear tasks.",
+      "items": {
+        "design": {
+          "title": "Product & design teams",
+          "description": "Plan screens, assign design tasks, and review progress from idea to handoff."
+        },
+        "software": {
+          "title": "Software teams",
+          "description": "Organize features, bugs, reviews, and releases inside simple project boards."
+        },
+        "marketing": {
+          "title": "Marketing teams",
+          "description": "Manage campaigns, content calendars, approvals, and launch tasks in one place."
+        },
+        "students": {
+          "title": "Students & small teams",
+          "description": "Split group work into clear tasks, deadlines, and responsibilities everyone can follow."
+        }
+      }
+    },
+    "FinalCTA": {
+      "label": "Get started",
+      "title": "Ready to organize your team with TeamLine?",
+      "description": "Start planning projects, assigning tasks, and tracking progress in one clean bilingual workspace.",
+      "button": "Start for Free",
+      "note": "No credit card required"
     }
   },
   "Auth": {
@@ -93,8 +128,21 @@
       "projects": "Projects",
       "tasks": "My Tasks",
       "team": "Team",
-      "settings": "Settings"
+      "settings": "Settings",
+      "manageWorkspaces": "Manage Workspaces"
     }
+  },
+  "Workspace": {
+    "title": "Workspaces",
+    "create": "Create Workspace",
+    "name": "Workspace Name",
+    "description": "Description",
+    "createBtn": "Create",
+    "noWorkspaces": "No workspaces yet",
+    "members": "Members",
+    "owner": "Owner",
+    "member": "Member",
+    "defaultWorkspaceName": "My Workspace"
   },
   "Validation": {
     "firstNameMin": "First name must be at least 2 characters",
@@ -103,6 +151,11 @@
     "passwordMin": "Password must be at least 8 characters",
     "passwordMismatch": "Passwords do not match",
     "passwordRequired": "Password is required"
+  },
+  "Footer": {
+    "devName": "Mohammed Al Safadi",
+    "text": "Developed by",
+    "devContactBtn": "Contact"
   },
   "Common": {
     "loading": "",

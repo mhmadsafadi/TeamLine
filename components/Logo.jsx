@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Logo = () => {
 
-    const t = useTranslations("Navbar");
+  const t = useTranslations("Navbar");
     
   return (
     <Link href="/" className="flex flex-col items-center">

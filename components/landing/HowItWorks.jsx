@@ -68,9 +68,6 @@ const HowItWorks = () => {
             label={t("label")}
             title={t("title")}
             description={t("description")}
-            labelClassName="text-main"
-            titleClassName="text-black"
-            descriptionClassName="text-gray-600"
         />
 
         <div className="relative mx-auto mt-16 max-w-5xl">
