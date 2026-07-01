@@ -14,7 +14,7 @@ const Features = () => {
             description={t("description")}
             labelClassName="text-white"
             titleClassName="text-white"
-            descriptionClassName="text-gray-200"
+            descriptionClassName="text-gray-100"
         />
 
          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -27,7 +27,7 @@ const Features = () => {
                 {t(`items.${key}.title`)}
               </h3>
 
-              <p className="mt-3 text-sm leading-7 text-gray-600">
+              <p className="mt-3 text-md leading-7 text-gray-600">
                 {t(`items.${key}.description`)}
               </p>
             </div>

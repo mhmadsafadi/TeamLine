@@ -130,6 +130,37 @@
       "team": "Team",
       "settings": "Settings",
       "manageWorkspaces": "Manage Workspaces"
+    },
+    "Settings": {
+      "title": "Settings",
+      "tabs": {
+        "profile": "Profile",
+        "password": "Password",
+        "logout": "Sign out"
+      },
+      "profile": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "verified": "Verified",
+        "discard": "Discard",
+        "save": "Save changes",
+        "savedSuccess": "Changes saved successfully"
+      },
+      "password": {
+        "current": "Current password",
+        "new": "New password",
+        "confirm": "Confirm password",
+        "update": "Update password",
+        "mismatch": "Passwords do not match",
+        "tooShort": "Password must be at least 8 characters",
+        "savedSuccess": "Password updated successfully"
+      },
+      "logout": {
+        "title": "Sign out of your account?",
+        "description": "You'll need to sign in again to access your account.",
+        "btn": "Sign out"
+      }
     }
   },
   "Workspace": {

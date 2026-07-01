@@ -23,7 +23,7 @@ export const DashboardNavbar = ({ onMenuClick }) => {
   const handleSignout = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push(`/${locale}/login`);
+    router.replace(`/${locale}/login`);
   };
 
   const fullName =
@@ -39,6 +39,8 @@ export const DashboardNavbar = ({ onMenuClick }) => {
       <div className="px-3 py-3 lg:px-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end gap-2">
+
+            {/* burger menu icon */}
             <button
               onClick={onMenuClick}
               type="button"
@@ -59,6 +61,7 @@ export const DashboardNavbar = ({ onMenuClick }) => {
                 />
               </svg>
             </button>
+            
             <Logo />
           </div>
 
@@ -90,15 +93,6 @@ export const DashboardNavbar = ({ onMenuClick }) => {
                       <p className="text-xs text-gray-500 truncate">{email}</p>
                     </div>
                     <ul className="p-2 text-sm text-gray-600">
-                      <li>
-                        <Link
-                          href={`/${locale}/dashboard`}
-                          onClick={() => setDropdownOpen(false)}
-                          className="flex items-center w-full px-3 py-2 rounded-lg hover:bg-gray-100 hover:text-main transition"
-                        >
-                          {t("profile")}
-                        </Link>
-                      </li>
                       <li>
                         <Link
                           href={`/${locale}/settings`}
