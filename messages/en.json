@@ -145,7 +145,10 @@
         "verified": "Verified",
         "discard": "Discard",
         "save": "Save changes",
-        "savedSuccess": "Changes saved successfully"
+        "savedSuccess": "Changes saved successfully",
+        "avatarTooLarge": "Image size must be less than 2MB",
+        "uploading": "Uploading image...",
+        "avatarInvalidType": "Please select a valid image"
       },
       "password": {
         "current": "Current password",
@@ -188,6 +191,7 @@
     "text": "Developed by",
     "devContactBtn": "Contact"
   },
+
   "Common": {
     "loading": "",
     "error": "",

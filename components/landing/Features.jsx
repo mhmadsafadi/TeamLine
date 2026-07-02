@@ -7,7 +7,7 @@ const Features = () => {
 
   return (
     <section className="mt-10 py-10 bg-linear-to-r from-secondary/50 to-main/75">
-      <div className="container text-center px-3 sm:px-0">
+      <div className="container text-center px-3">
         <SectionHeader
             label={t("label")}
             title={t("title")}

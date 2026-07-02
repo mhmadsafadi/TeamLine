@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 import { useAuthStore } from "@/store/authStore";
+import UserAvatar from "./UserAvatar";
 
 export const DashboardNavbar = ({ onMenuClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -32,7 +33,6 @@ export const DashboardNavbar = ({ onMenuClick }) => {
     user?.email?.split("@")[0] ||
     "User";
   const email = user?.email || "";
-  const initials = fullName.charAt(0).toUpperCase();
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
@@ -74,11 +74,12 @@ export const DashboardNavbar = ({ onMenuClick }) => {
                 className="flex text-sm rounded-full focus:ring-4 focus:ring-gray-300 cursor-pointer transition"
               >
                 <span className="sr-only">Open user menu</span>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-main to-secondary flex items-center justify-center text-white text-xs font-bold">
-                  {initials}
-                </div>
+                <UserAvatar
+                  avatarUrl={user?.user_metadata?.avatar_url || null}
+                  fullName={fullName}
+                  size="sm"
+                />
               </button>
-
               {dropdownOpen && (
                 <>
                   <div

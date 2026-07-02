@@ -32,7 +32,7 @@ const Hero = () => {
 
       <CTAButton label={t("btn")} />
 
-      <div className="w-full mx-auto mt-12 px-2 md:px-6 lg:px-0">
+      <div className="w-full mx-auto mt-12 px-3 md:px-6 lg:px-0">
         <div className="bg-white p-2 md:p-3 rounded-2xl shadow-2xl">
           <Image
             src={locale === "ar" ? "/hero-img-ar.png" : "/hero-img-en.png"}
@@ -40,7 +40,7 @@ const Hero = () => {
             width={1200}
             height={200}
             priority
-            className="rounded-xl w-full h-auto md:h-[800px] object-cover object-[0%_35%]"
+            className="rounded-xl w-full h-auto md:h-[640px] object-cover object-[0%_35%]"
           />
         </div>
       </div>

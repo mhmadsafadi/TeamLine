@@ -23,11 +23,12 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   const fullName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "User";
   const email = user?.email || "";
-  const initials = fullName.charAt(0).toUpperCase();
 
   const isActive = (path) => pathname.includes(path);
   const navItems = getNavItems(t, locale);
   const bottomItems = getBottomItems(t, locale);
+
+  const avatarUrl = user?.user_metadata?.avatar_url || null;
 
   return (
     <>
@@ -63,7 +64,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <SidebarProfile
                 fullName={fullName}
                 email={email}
-                initials={initials}
+                avatarUrl={avatarUrl}
                 locale={locale}
                 onClick={onClose}
               />

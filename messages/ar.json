@@ -145,7 +145,10 @@
         "verified": "موثق",
         "discard": "تجاهل",
         "save": "حفظ التغييرات",
-        "savedSuccess": "تم حفظ التغييرات بنجاح"
+        "savedSuccess": "تم حفظ التغييرات بنجاح",
+        "avatarTooLarge": "حجم الصورة يجب أن يكون أقل من 2MB",
+        "avatarInvalidType": "يرجى اختيار صورة صحيحة",
+        "uploading": "جارٍ رفع الصورة..."
       },
       "password": {
         "current": "كلمة المرور الحالية",
@@ -188,6 +191,7 @@
     "text": "تم التطوير بواسطة",
     "devContactBtn": "التواصل"
   },
+
   "Common": {
     "loading": "",
     "error": "",
