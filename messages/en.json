@@ -164,19 +164,48 @@
         "description": "You'll need to sign in again to access your account.",
         "btn": "Sign out"
       }
+    },
+    "stats": {
+      "projects": "Projects",
+      "completed": "Completed Tasks",
+      "inProgress": "In Progress",
+      "members": "Team Members"
+    },
+    "myTasks": {
+      "title": "My Tasks",
+      "viewAll": "View all",
+      "empty": "No tasks assigned to you",
+      "priority": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      }
+    },
+    "recentProjects": {
+      "title": "Recent Projects",
+      "viewAll": "View all",
+      "empty": "No projects yet",
+      "create": "Create project",
+      "tasks": "tasks"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "empty": "No activity yet",
+      "taskAdded": "Task added"
     }
   },
   "Workspace": {
-    "title": "Workspaces",
-    "create": "Create Workspace",
+    "createTitle": "Create a Workspace",
+    "createDescription": "A workspace is where you manage your projects and team",
     "name": "Workspace Name",
+    "namePlaceholder": "e.g. My Company, My Projects...",
+    "nameRequired": "Workspace name is required",
     "description": "Description",
-    "createBtn": "Create",
-    "noWorkspaces": "No workspaces yet",
-    "members": "Members",
-    "owner": "Owner",
-    "member": "Member",
-    "defaultWorkspaceName": "My Workspace"
+    "descriptionPlaceholder": "A brief description of your workspace",
+    "createBtn": "Create Workspace",
+    "defaultWorkspaceName": "My Workspace",
+    "manageWorkspaces": "Manage Workspaces",
+    "createError": "Something went wrong, please try again"
   },
   "Validation": {
     "firstNameMin": "First name must be at least 2 characters",

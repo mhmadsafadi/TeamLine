@@ -41,7 +41,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       }`}>
         <div className="flex flex-col h-full px-3 py-4 overflow-y-auto bg-white border-e border-gray-200">
 
-          <WorkspaceSelector workspace={currentWorkspace} locale={locale} />
+          <WorkspaceSelector locale={locale} />
 
           <ul className="space-y-1 flex-1">
             {navItems.map((item) => (

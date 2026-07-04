@@ -164,19 +164,48 @@
         "description": "ستحتاج لتسجيل الدخول مجدداً للوصول لحسابك.",
         "btn": "تسجيل الخروج"
       }
+    },
+    "stats": {
+      "projects": "المشاريع",
+      "completed": "المهام المكتملة",
+      "inProgress": "قيد التنفيذ",
+      "members": "أعضاء الفريق"
+    },
+    "myTasks": {
+      "title": "مهامي",
+      "viewAll": "عرض الكل",
+      "empty": "لا توجد مهام مسندة إليك",
+      "priority": {
+        "high": "عالية",
+        "medium": "متوسطة",
+        "low": "منخفضة"
+      }
+    },
+    "recentProjects": {
+      "title": "آخر المشاريع",
+      "viewAll": "عرض الكل",
+      "empty": "لا توجد مشاريع بعد",
+      "create": "إنشاء مشروع",
+      "tasks": "مهمة"
+    },
+    "activity": {
+      "title": "آخر النشاطات",
+      "empty": "لا توجد نشاطات بعد",
+      "taskAdded": "تمت إضافة مهمة"
     }
   },
   "Workspace": {
-    "title": "مساحات العمل",
-    "create": "إنشاء مساحة عمل",
+    "createTitle": "إنشاء مساحة عمل",
+    "createDescription": "مساحة العمل هي المكان الذي تدير فيه مشاريعك وفريقك",
     "name": "اسم مساحة العمل",
+    "namePlaceholder": "مثال: شركتي، مشاريعي...",
+    "nameRequired": "اسم مساحة العمل مطلوب",
     "description": "الوصف",
-    "createBtn": "إنشاء",
-    "noWorkspaces": "لا توجد مساحات عمل بعد",
-    "members": "الأعضاء",
-    "owner": "مالك",
-    "member": "عضو",
-    "defaultWorkspaceName": "مساحة عملي"
+    "descriptionPlaceholder": "وصف مختصر لمساحة العمل",
+    "createBtn": "إنشاء مساحة العمل",
+    "defaultWorkspaceName": "مساحة عملي",
+    "manageWorkspaces": "إدارة مساحات العمل",
+    "createError": "حدث خطأ أثناء إنشاء مساحة العمل، يرجى المحاولة مجدداً"
   },
   "Validation": {
     "firstNameMin": "الاسم الأول يجب أن يكون حرفين على الأقل",
