@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useAuthStore } from "@/store/authStore";
 
 const StatCard = ({ label, value, icon, loading }) => (
-  <div className="h-28 p-5 bg-white border border-gray-200 rounded-2xl flex items-center gap-4">
+  <div className="h-28 p-3 md:p-5 bg-white border border-gray-200 rounded-2xl flex items-center gap-4">
     <div className="w-12 h-12 rounded-xl bg-[#EEEDFE] flex items-center justify-center shrink-0">
       {icon}
     </div>
@@ -14,9 +14,9 @@ const StatCard = ({ label, value, icon, loading }) => (
       {loading ? (
         <div className="w-16 h-6 bg-gray-200 animate-pulse rounded mb-1" />
       ) : (
-        <p className="text-2xl font-bold text-gray-800">{value}</p>
+        <p className="text-lg md:text-2xl font-bold text-gray-800">{value}</p>
       )}
-      <p className="text-sm text-gray-400">{label}</p>
+      <p className="text-xs md:text-sm text-gray-400">{label}</p>
     </div>
   </div>
 );

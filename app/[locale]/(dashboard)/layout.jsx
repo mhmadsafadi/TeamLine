@@ -10,8 +10,8 @@ import Sidebar from "./components/Sidebar";
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { fetchUser, fetchWorkspace, workspace } = useAuthStore();
-  const router = useRouter();
-  const locale = useLocale();
+  // const router = useRouter();
+  // const locale = useLocale();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const DashboardLayout = ({ children }) => {
     <div className="min-h-screen">
       <DashboardNavbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="ltr:sm:ml-64 rtl:sm:mr-64 pt-20 p-4">{children}</main>
+      <main className="ltr:sm:ml-64 rtl:sm:mr-64 mt-20 md:mt-16 p-3 md:p-7">{children}</main>
     </div>
   );
 };
