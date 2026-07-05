@@ -1,9 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
-import { useAuthStore } from "@/store/authStore";
+import { createClient } from "@/lib/supabase/server";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getWorkspace } from "@/lib/getWorkspace";
 import Link from "next/link";
 
 const priorityColors = {
@@ -12,38 +9,23 @@ const priorityColors = {
   low: "bg-green-100 text-green-600",
 };
 
-const MyTasks = () => {
-  const t = useTranslations("Dashboard.myTasks");
-  const locale = useLocale();
-  const { workspace, user } = useAuthStore();
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+const MyTasks = async () => {
+  const t = await getTranslations("Dashboard.myTasks");
+  const locale = await getLocale();
+  const supabase = await createClient();
+  const workspace = await getWorkspace();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  useEffect(() => {
-    if (!workspace || !user) return;
+  if (!workspace || !user) return null;
 
-    const fetchTasks = async () => {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("tasks")
-        .select(
-          `
-          id, title, priority, due_date,
-          columns(name),
-          projects(id, name, workspace_id)
-        `,
-        )
-        .eq("assigned_to", user.id)
-        .eq("projects.workspace_id", workspace.id)
-        .order("due_date", { ascending: true })
-        .limit(5);
-
-      setTasks(data || []);
-      setLoading(false);
-    };
-
-    fetchTasks();
-  }, [workspace, user]);
+  const { data: tasks } = await supabase
+    .from("tasks")
+    .select(`id, title, priority, due_date, columns(name), projects(id, name)`)
+    .eq("assigned_to", user.id)
+    .order("due_date", { ascending: true })
+    .limit(5);
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-5">
@@ -57,16 +39,7 @@ const MyTasks = () => {
         </Link>
       </div>
 
-      {loading ? (
-        <div className="space-y-3">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="h-14 bg-gray-100 animate-pulse rounded-xl"
-            />
-          ))}
-        </div>
-      ) : tasks.length === 0 ? (
+      {!tasks || tasks.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-center">
           <svg
             className="w-10 h-10 text-gray-300 mb-3"

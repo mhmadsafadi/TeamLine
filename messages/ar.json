@@ -192,6 +192,33 @@
       "title": "آخر النشاطات",
       "empty": "لا توجد نشاطات بعد",
       "taskAdded": "تمت إضافة مهمة"
+    },
+    "Projects": {
+      "title": "المشاريع",
+      "create": "مشروع جديد",
+      "empty": "لا توجد مشاريع بعد",
+      "emptyDescription": "ابدأ بإنشاء مشروعك الأول",
+      "card": {
+        "untitled": "بدون عنوان",
+        "noDescription": "لا يوجد وصف",
+        "progress": "نسبة الإنجاز",
+        "dueDate": "تاريخ التسليم",
+        "status": {
+          "active": "قيد التنفيذ",
+          "completed": "مكتمل",
+          "paused": "متوقف"
+        }
+      },
+      "modal": {
+        "title": "إنشاء مشروع جديد",
+        "name": "اسم المشروع",
+        "namePlaceholder": "مثال: موقع الشركة...",
+        "nameRequired": "اسم المشروع مطلوب",
+        "description": "الوصف",
+        "descriptionPlaceholder": "وصف مختصر للمشروع",
+        "cancel": "إلغاء",
+        "create": "إنشاء"
+      }
     }
   },
   "Workspace": {

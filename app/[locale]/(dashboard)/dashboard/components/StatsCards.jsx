@@ -1,80 +1,54 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
+import { getWorkspace } from "@/lib/getWorkspace";
 
-import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
-import { useAuthStore } from "@/store/authStore";
-
-const StatCard = ({ label, value, icon, loading }) => (
-  <div className="h-28 p-3 md:p-5 bg-white border border-gray-200 rounded-2xl flex items-center gap-4">
+const StatCard = ({ label, value, icon }) => (
+  <div className="h-28 p-5 bg-white border border-gray-200 rounded-2xl flex items-center gap-4">
     <div className="w-12 h-12 rounded-xl bg-[#EEEDFE] flex items-center justify-center shrink-0">
       {icon}
     </div>
     <div>
-      {loading ? (
-        <div className="w-16 h-6 bg-gray-200 animate-pulse rounded mb-1" />
-      ) : (
-        <p className="text-lg md:text-2xl font-bold text-gray-800">{value}</p>
-      )}
-      <p className="text-xs md:text-sm text-gray-400">{label}</p>
+      <p className="text-2xl font-bold text-gray-800">{value}</p>
+      <p className="text-sm text-gray-400">{label}</p>
     </div>
   </div>
 );
 
-const StatsCards = () => {
-  const t = useTranslations("Dashboard.stats");
-  const { workspace } = useAuthStore();
-  const [stats, setStats] = useState({
-    projects: 0,
-    completed: 0,
-    inProgress: 0,
-    members: 0,
-  });
-  const [loading, setLoading] = useState(true);
+const StatsCards = async () => {
+  const t = await getTranslations("Dashboard.stats");
+  const supabase = await createClient();
+  const workspace = await getWorkspace();
 
-  useEffect(() => {
-    if (!workspace) return;
+  if (!workspace) return null;
 
-    const fetchStats = async () => {
-      const supabase = createClient();
-
-      const [
-        { count: projects },
-        { count: completed },
-        { count: inProgress },
-        { count: members },
-      ] = await Promise.all([
-        supabase
-          .from("projects")
-          .select("*", { count: "exact", head: true })
-          .eq("workspace_id", workspace.id),
-        supabase
-          .from("tasks")
-          .select("*", { count: "exact", head: true })
-          .eq("project_id", workspace.id),
-        supabase.from("tasks").select("*", { count: "exact", head: true }),
-        supabase
-          .from("workspace_members")
-          .select("*", { count: "exact", head: true })
-          .eq("workspace_id", workspace.id),
-      ]);
-
-      setStats({
-        projects: projects || 0,
-        completed: completed || 0,
-        inProgress: inProgress || 0,
-        members: members || 0,
-      });
-      setLoading(false);
-    };
-
-    fetchStats();
-  }, [workspace]);
+  const [
+    { count: projects },
+    { count: members },
+    { count: completed },
+    { count: inProgress },
+  ] = await Promise.all([
+    supabase
+      .from("projects")
+      .select("*", { count: "exact", head: true })
+      .eq("workspace_id", workspace.id),
+    supabase
+      .from("workspace_members")
+      .select("*", { count: "exact", head: true })
+      .eq("workspace_id", workspace.id),
+    supabase
+      .from("tasks")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "done"),
+    supabase
+      .from("tasks")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "in_progress"),
+  ]);
 
   const cards = [
     {
       label: t("projects"),
-      value: stats.projects,
+      value: projects || 0,
       icon: (
         <svg
           className="w-6 h-6 text-main"
@@ -93,8 +67,27 @@ const StatsCards = () => {
       ),
     },
     {
+      label: t("members"),
+      value: members || 0,
+      icon: (
+        <svg
+          className="w-6 h-6 text-main"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth={2}
+            d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+          />
+        </svg>
+      ),
+    },
+    {
       label: t("completed"),
-      value: stats.completed,
+      value: completed || 0,
       icon: (
         <svg
           className="w-6 h-6 text-main"
@@ -114,7 +107,7 @@ const StatsCards = () => {
     },
     {
       label: t("inProgress"),
-      value: stats.inProgress,
+      value: inProgress || 0,
       icon: (
         <svg
           className="w-6 h-6 text-main"
@@ -132,31 +125,12 @@ const StatsCards = () => {
         </svg>
       ),
     },
-    {
-      label: t("members"),
-      value: stats.members,
-      icon: (
-        <svg
-          className="w-6 h-6 text-main"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeWidth={2}
-            d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-          />
-        </svg>
-      ),
-    },
   ];
 
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((card) => (
-        <StatCard key={card.label} {...card} loading={loading} />
+        <StatCard key={card.label} {...card} />
       ))}
     </section>
   );

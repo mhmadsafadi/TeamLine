@@ -1,41 +1,21 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getWorkspace } from "@/lib/getWorkspace";
 
-import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
-import { useAuthStore } from "@/store/authStore";
+const ActivityFeed = async () => {
+  const t = await getTranslations("Dashboard.activity");
+  const locale = await getLocale();
+  const supabase = await createClient();
+  const workspace = await getWorkspace();
 
-const ActivityFeed = () => {
-  const t = useTranslations("Dashboard.activity");
-  const locale = useLocale();
-  const { workspace } = useAuthStore();
-  const [activities, setActivities] = useState([]);
-  const [loading, setLoading] = useState(true);
+  if (!workspace) return null;
 
-  useEffect(() => {
-    if (!workspace) return;
-
-    const fetchActivities = async () => {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("tasks")
-        .select(
-          `
-          id, title, created_at,
-          projects(name),
-          columns(name)
-        `,
-        )
-        .eq("projects.workspace_id", workspace.id)
-        .order("created_at", { ascending: false })
-        .limit(10);
-
-      setActivities(data || []);
-      setLoading(false);
-    };
-
-    fetchActivities();
-  }, [workspace]);
+  const { data: activities } = await supabase
+    .from("tasks")
+    .select(`id, title, created_at, projects(name)`)
+    .eq("projects.workspace_id", workspace.id)
+    .order("created_at", { ascending: false })
+    .limit(10);
 
   const timeAgo = (date) => {
     const diff = Date.now() - new Date(date).getTime();
@@ -47,11 +27,10 @@ const ActivityFeed = () => {
       if (mins < 60) return `منذ ${mins} دقيقة`;
       if (hours < 24) return `منذ ${hours} ساعة`;
       return `منذ ${days} يوم`;
-    } else {
-      if (mins < 60) return `${mins}m ago`;
-      if (hours < 24) return `${hours}h ago`;
-      return `${days}d ago`;
     }
+    if (mins < 60) return `${mins}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    return `${days}d ago`;
   };
 
   return (
@@ -60,19 +39,7 @@ const ActivityFeed = () => {
         {t("title")}
       </h2>
 
-      {loading ? (
-        <div className="space-y-4">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse shrink-0" />
-              <div className="flex-1 space-y-1.5">
-                <div className="h-3 bg-gray-200 animate-pulse rounded w-3/4" />
-                <div className="h-3 bg-gray-200 animate-pulse rounded w-1/2" />
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : activities.length === 0 ? (
+      {!activities || activities.length === 0 ? (
         <div className="flex flex-col items-center justify-center flex-1 text-center">
           <svg
             className="w-10 h-10 text-gray-300 mb-3"
@@ -113,7 +80,7 @@ const ActivityFeed = () => {
               <div className="min-w-0">
                 <p className="text-sm text-gray-700">
                   <span className="font-medium">{t("taskAdded")}</span>{" "}
-                  <span className="text-main">{activity.title}</span>
+                  <span className="text-main">"{activity.title}"</span>
                 </p>
                 <p className="text-xs text-gray-400 mt-0.5">
                   {activity.projects?.name} • {timeAgo(activity.created_at)}

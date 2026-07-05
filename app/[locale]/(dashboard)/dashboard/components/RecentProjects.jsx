@@ -1,41 +1,22 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
-import { useAuthStore } from "@/store/authStore";
+import { createClient } from "@/lib/supabase/server";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getWorkspace } from "@/lib/getWorkspace";
 import Link from "next/link";
 
-const RecentProjects = () => {
-  const t = useTranslations("Dashboard.recentProjects");
-  const locale = useLocale();
-  const { workspace } = useAuthStore();
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+const RecentProjects = async () => {
+  const t = await getTranslations("Dashboard.recentProjects");
+  const locale = await getLocale();
+  const supabase = await createClient();
+  const workspace = await getWorkspace();
 
-  useEffect(() => {
-    if (!workspace) return;
+  if (!workspace) return null;
 
-    const fetchProjects = async () => {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from("projects")
-        .select(
-          `
-          id, name, description, created_at,
-          tasks(count)
-        `,
-        )
-        .eq("workspace_id", workspace.id)
-        .order("created_at", { ascending: false })
-        .limit(4);
-
-      setProjects(data || []);
-      setLoading(false);
-    };
-
-    fetchProjects();
-  }, [workspace]);
+  const { data: projects } = await supabase
+    .from("projects")
+    .select(`id, name, description, created_at, tasks(count)`)
+    .eq("workspace_id", workspace.id)
+    .order("created_at", { ascending: false })
+    .limit(4);
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-5">
@@ -49,16 +30,7 @@ const RecentProjects = () => {
         </Link>
       </div>
 
-      {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="h-24 bg-gray-100 animate-pulse rounded-xl"
-            />
-          ))}
-        </div>
-      ) : projects.length === 0 ? (
+      {!projects || projects.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-center">
           <svg
             className="w-10 h-10 text-gray-300 mb-3"

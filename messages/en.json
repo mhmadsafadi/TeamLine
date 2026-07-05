@@ -192,6 +192,33 @@
       "title": "Recent Activity",
       "empty": "No activity yet",
       "taskAdded": "Task added"
+    },
+    "Projects": {
+      "title": "Projects",
+      "create": "New Project",
+      "empty": "No projects yet",
+      "emptyDescription": "Start by creating your first project",
+      "card": {
+        "untitled": "Untitled",
+        "noDescription": "No description",
+        "progress": "Progress",
+        "dueDate": "Due Date",
+        "status": {
+          "active": "In Progress",
+          "completed": "Completed",
+          "paused": "Paused"
+        }
+      },
+      "modal": {
+        "title": "Create New Project",
+        "name": "Project Name",
+        "namePlaceholder": "e.g. Company Website...",
+        "nameRequired": "Project name is required",
+        "description": "Description",
+        "descriptionPlaceholder": "A brief description of the project",
+        "cancel": "Cancel",
+        "create": "Create"
+      }
     }
   },
   "Workspace": {
