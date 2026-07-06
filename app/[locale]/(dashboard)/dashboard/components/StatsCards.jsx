@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
-import { getWorkspace } from "@/lib/getWorkspace";
 
 const StatCard = ({ label, value, icon }) => (
   <div className="h-28 p-5 bg-white border border-gray-200 rounded-2xl flex items-center gap-4">
@@ -17,7 +16,17 @@ const StatCard = ({ label, value, icon }) => (
 const StatsCards = async () => {
   const t = await getTranslations("Dashboard.stats");
   const supabase = await createClient();
-  const workspace = await getWorkspace();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: workspace } = await supabase
+    .from("workspaces")
+    .select("id")
+    .eq("owner_id", user.id)
+    .single();
 
   if (!workspace) return null;
 

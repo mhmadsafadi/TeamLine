@@ -9,7 +9,7 @@ import Sidebar from "./Sidebar";
 
 const DashboardLayoutClient = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { fetchUser, fetchWorkspace, workspace } = useAuthStore();
+  const { fetchUser, workspace } = useAuthStore();
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -17,7 +17,6 @@ const DashboardLayoutClient = ({ children }) => {
   useEffect(() => {
     const init = async () => {
       await fetchUser();
-      await fetchWorkspace();
     };
     init();
   }, []);

@@ -1,12 +1,21 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations, getLocale } from "next-intl/server";
-import { getWorkspace } from "@/lib/getWorkspace";
 
 const ActivityFeed = async () => {
   const t = await getTranslations("Dashboard.activity");
   const locale = await getLocale();
   const supabase = await createClient();
-  const workspace = await getWorkspace();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: workspace } = await supabase
+    .from("workspaces")
+    .select("id")
+    .eq("owner_id", user.id)
+    .single();
 
   if (!workspace) return null;
 

@@ -3,14 +3,30 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useAuthStore } from "@/store/authStore";
+import { createClient } from "@/lib/supabase/client";
 
 const WorkspaceSelector = ({ locale }) => {
   const [open, setOpen] = useState(false);
+  const [workspace, setWorkspace] = useState(null);
   const t = useTranslations("Workspace");
-  const { workspace, fetchWorkspace } = useAuthStore();
 
   useEffect(() => {
+    const fetchWorkspace = async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data } = await supabase
+        .from("workspaces")
+        .select("*")
+        .eq("owner_id", user.id)
+        .single();
+
+      setWorkspace(data);
+    };
+
     fetchWorkspace();
   }, []);
 
@@ -51,7 +67,6 @@ const WorkspaceSelector = ({ locale }) => {
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute top-full mt-1 w-full z-50 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-            {/* اسم الـ workspace الحالي */}
             {workspace && (
               <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-100">
                 <div className="w-6 h-6 rounded-md bg-gradient-to-r from-main to-secondary flex items-center justify-center text-white text-xs font-bold shrink-0">
@@ -77,7 +92,6 @@ const WorkspaceSelector = ({ locale }) => {
               </div>
             )}
 
-            {/* إنشاء workspace جديد */}
             <Link
               href={`/${locale}/workspaces`}
               onClick={() => setOpen(false)}

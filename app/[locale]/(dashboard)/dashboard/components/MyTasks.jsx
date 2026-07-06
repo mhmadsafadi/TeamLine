@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations, getLocale } from "next-intl/server";
-import { getWorkspace } from "@/lib/getWorkspace";
 import Link from "next/link";
 
 const priorityColors = {
@@ -13,12 +12,19 @@ const MyTasks = async () => {
   const t = await getTranslations("Dashboard.myTasks");
   const locale = await getLocale();
   const supabase = await createClient();
-  const workspace = await getWorkspace();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  if (!user) return null;
 
-  if (!workspace || !user) return null;
+  const { data: workspace } = await supabase
+    .from("workspaces")
+    .select("id")
+    .eq("owner_id", user.id)
+    .single();
+
+  if (!workspace) return null;
 
   const { data: tasks } = await supabase
     .from("tasks")
