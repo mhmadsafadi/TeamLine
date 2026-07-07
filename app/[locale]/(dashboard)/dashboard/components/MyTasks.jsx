@@ -22,7 +22,7 @@ const MyTasks = async () => {
     .from("workspaces")
     .select("id")
     .eq("owner_id", user.id)
-    .single();
+    .limit(1);
 
   if (!workspace) return null;
 

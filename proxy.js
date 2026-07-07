@@ -37,7 +37,8 @@ export default async function proxy(request) {
     pathname.includes('/projects') ||
     pathname.includes('/tasks') ||
     pathname.includes('/team') ||
-    pathname.includes('/settings');
+    pathname.includes('/settings') ||
+    pathname.includes('/workspaces');
 
   // لو مسجل ويحاول يدخل auth → حوله للـ dashboard
   if (user && isAuthPage) {
@@ -50,7 +51,6 @@ export default async function proxy(request) {
     const locale = pathname.split('/')[1];
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
-
   return response;
 }
 

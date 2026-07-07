@@ -22,9 +22,9 @@ const WorkspaceSelector = ({ locale }) => {
         .from("workspaces")
         .select("*")
         .eq("owner_id", user.id)
-        .single();
+        .limit(1);
 
-      setWorkspace(data);
+      setWorkspace(data?.[0] || null);
     };
 
     fetchWorkspace();

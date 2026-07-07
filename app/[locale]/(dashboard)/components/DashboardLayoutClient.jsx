@@ -10,7 +10,8 @@ import Sidebar from "./Sidebar";
 
 const DashboardLayoutClient = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [workspace, setWorkspace] = useState(undefined); // ← undefined مش null
+  const [workspaceChecked, setWorkspaceChecked] = useState(false);
+  const [hasWorkspace, setHasWorkspace] = useState(false);
   const { fetchUser } = useAuthStore();
   const pathname = usePathname();
   const router = useRouter();
@@ -18,35 +19,47 @@ const DashboardLayoutClient = ({ children }) => {
 
   useEffect(() => {
     const init = async () => {
-      await fetchUser();
+  await fetchUser();
 
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
+  const supabase = createClient();
 
-      const { data } = await supabase
-        .from("workspaces")
-        .select("id, name")
-        .eq("owner_id", user.id)
-        .single();
+  const { data: { user } } = await supabase.auth.getUser();
+  console.log("user.id:", user?.id); // ← موجود
 
-      setWorkspace(data); // null لو ما في، object لو في
-    };
+  if (!user) {
+    setWorkspaceChecked(true);
+    setHasWorkspace(false);
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("workspaces")
+    .select("id, owner_id")
+    .eq("owner_id", user.id)
+    .limit(1)
+
+  console.log("workspace data:", data);   // ← موجود
+  console.log("workspace error:", error); // ← موجود
+
+  setHasWorkspace(data && data.length > 0); // ← array مش objec
+  setWorkspaceChecked(true);
+};
+
     init();
   }, []);
 
   useEffect(() => {
-    // undefined = لسا ما تحمل → لا تعمل redirect
-    // null = تحمل ومافي workspace → اعمل redirect
-    if (workspace === undefined) return;
+    console.log("workspaceChecked:", workspaceChecked);
+    console.log("hasWorkspace:", hasWorkspace);
+    console.log("pathname:", pathname);
+
+    if (!workspaceChecked) return;
 
     const isWorkspacePage = pathname.includes("/workspaces");
-    if (workspace === null && !isWorkspacePage) {
+    if (!hasWorkspace && !isWorkspacePage) {
       router.replace(`/${locale}/workspaces`);
     }
-  }, [workspace, pathname]);
+  }, [workspaceChecked, hasWorkspace, pathname]);
 
   return (
     <div className="min-h-screen">
@@ -59,4 +72,4 @@ const DashboardLayoutClient = ({ children }) => {
   );
 };
 
-export default DashboardLayoutClient;
+export default DashboardLayoutClient; 

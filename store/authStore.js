@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/client";
 
 export const useAuthStore = create((set) => ({
   user: null,
-  workspace: null,
   loading: true,
 
   fetchUser: async () => {

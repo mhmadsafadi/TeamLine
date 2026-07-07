@@ -12,13 +12,13 @@ const RecentProjects = async () => {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: workspace } = await supabase
+  const { data } = await supabase
     .from("workspaces")
     .select("id")
     .eq("owner_id", user.id)
-    .single();
+    .limit(1);
 
-  if (!workspace) return null;
+  const workspace = data?.[0];
 
   const { data: projects } = await supabase
     .from("projects")

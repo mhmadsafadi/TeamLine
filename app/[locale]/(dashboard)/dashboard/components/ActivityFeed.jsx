@@ -11,14 +11,14 @@ const ActivityFeed = async () => {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: workspace } = await supabase
+  const { data } = await supabase
     .from("workspaces")
     .select("id")
     .eq("owner_id", user.id)
-    .single();
+    .limit(1);
 
-  if (!workspace) return null;
-
+  const workspace = data?.[0];
+  
   const { data: activities } = await supabase
     .from("tasks")
     .select(`id, title, created_at, projects(name)`)
@@ -89,7 +89,7 @@ const ActivityFeed = async () => {
               <div className="min-w-0">
                 <p className="text-sm text-gray-700">
                   <span className="font-medium">{t("taskAdded")}</span>{" "}
-                  <span className="text-main">"{activity.title}"</span>
+                  <span className="text-main">{activity.title}</span>
                 </p>
                 <p className="text-xs text-gray-400 mt-0.5">
                   {activity.projects?.name} • {timeAgo(activity.created_at)}
