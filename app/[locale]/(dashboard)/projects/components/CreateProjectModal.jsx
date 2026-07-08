@@ -13,6 +13,7 @@ const CreateProjectModal = ({ workspaceId, onClose, onCreated }) => {
   const [error, setError] = useState("");
 
   const handleCreate = async () => {
+    console.log("المساحة المرسلة للمودال هي:", workspaceId);
     if (!name.trim()) { setError(t("nameRequired")); return; }
     setLoading(true);
     setError("");

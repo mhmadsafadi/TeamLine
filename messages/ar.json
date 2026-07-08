@@ -218,6 +218,33 @@
         "descriptionPlaceholder": "وصف مختصر للمشروع",
         "cancel": "إلغاء",
         "create": "إنشاء"
+      },
+      "Project": {
+        "projects": "المشاريع",
+        "addColumn": "إضافة عمود",
+        "addTask": "إضافة مهمة",
+        "taskModal": {
+          "title": "إضافة مهمة جديدة",
+          "taskTitle": "عنوان المهمة",
+          "taskTitlePlaceholder": "مثال: تصميم الواجهة...",
+          "titleRequired": "عنوان المهمة مطلوب",
+          "priority": "الأولوية",
+          "low": "منخفضة",
+          "medium": "متوسطة",
+          "high": "عالية",
+          "dueDate": "تاريخ التسليم",
+          "cancel": "إلغاء",
+          "add": "إضافة"
+        },
+        "columnModal": {
+          "title": "إضافة عمود جديد",
+          "name": "اسم العمود",
+          "namePlaceholder": "مثال: قيد المراجعة...",
+          "nameRequired": "اسم العمود مطلوب",
+          "color": "اللون",
+          "cancel": "إلغاء",
+          "add": "إضافة"
+        }
       }
     }
   },

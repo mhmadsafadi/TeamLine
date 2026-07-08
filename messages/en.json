@@ -218,6 +218,33 @@
         "descriptionPlaceholder": "A brief description of the project",
         "cancel": "Cancel",
         "create": "Create"
+      },
+      "Project": {
+        "projects": "Projects",
+        "addColumn": "Add column",
+        "addTask": "Add task",
+        "taskModal": {
+          "title": "Add new task",
+          "taskTitle": "Task title",
+          "taskTitlePlaceholder": "e.g. Design the interface...",
+          "titleRequired": "Task title is required",
+          "priority": "Priority",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High",
+          "dueDate": "Due date",
+          "cancel": "Cancel",
+          "add": "Add"
+        },
+        "columnModal": {
+          "title": "Add new column",
+          "name": "Column name",
+          "namePlaceholder": "e.g. In Review...",
+          "nameRequired": "Column name is required",
+          "color": "Color",
+          "cancel": "Cancel",
+          "add": "Add"
+        }
       }
     }
   },

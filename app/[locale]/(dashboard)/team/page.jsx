@@ -1,9 +1,11 @@
+import React from 'react'
+
 const page = () => {
   return (
-    <h1 className="text-2xl font-bold text-gray-900">
-      أعضاء الفريق / Team Members
-    </h1>
-  );
-};
+    <div>
+      Teams
+    </div>
+  )
+}
 
-export default page;
+export default page
