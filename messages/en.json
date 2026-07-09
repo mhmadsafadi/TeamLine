@@ -243,8 +243,45 @@
           "nameRequired": "Column name is required",
           "color": "Color",
           "cancel": "Cancel",
-          "add": "Add"
+          "add": "Add",
+          "type": "Column type",
+          "todo": "To Do",
+          "inProgress": "In Progress",
+          "done": "Done"
         }
+      }
+    },
+    "Tasks": {
+      "title": "My Tasks",
+      "empty": "No tasks assigned to you",
+      "emptyDescription": "Tasks assigned to you from all projects will appear here",
+      "overdue": "overdue",
+      "filter": {
+        "all": "All",
+        "todo": "To Do",
+        "in_progress": "In Progress",
+        "done": "Completed",
+        "high": "High Priority"
+      }
+    },
+    "Team": {
+      "title": "Team",
+      "members": "members",
+      "invite": "Invite member",
+      "owner": "Owner",
+      "member": "Member",
+      "you": "you",
+      "remove": "Remove",
+      "empty": "No members yet",
+      "modal": {
+        "title": "Invite new member",
+        "email": "Email address",
+        "emailPlaceholder": "example@email.com",
+        "emailRequired": "Email is required",
+        "userNotFound": "No user found with this email",
+        "alreadyMember": "This user is already a member",
+        "cancel": "Cancel",
+        "invite": "Invite"
       }
     }
   },

@@ -19,6 +19,8 @@ const AddColumnModal = ({ projectId, position, onClose, onAdded }) => {
   const [color, setColor] = useState("default");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [type, setType] = useState("todo");
+
 
   const handleAdd = async () => {
     if (!name.trim()) {
@@ -30,7 +32,7 @@ const AddColumnModal = ({ projectId, position, onClose, onAdded }) => {
     const supabase = createClient();
     const { data, error: err } = await supabase
       .from("columns")
-      .insert({ name: name.trim(), project_id: projectId, position, color })
+      .insert({ name: name.trim(), project_id: projectId, position, color, type })
       .select()
       .single();
 
@@ -71,6 +73,18 @@ const AddColumnModal = ({ projectId, position, onClose, onAdded }) => {
         </div>
 
         <div className="space-y-3">
+          <div>
+            <label className="block text-sm text-gray-500 mb-1">{t("type")}</label>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="w-full py-2 px-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-main"
+            >
+              <option value="todo">{t("todo")}</option>
+              <option value="in_progress">{t("inProgress")}</option>
+              <option value="done">{t("done")}</option>
+            </select>
+          </div>
           <div>
             <label className="block text-sm text-gray-500 mb-1">
               {t("name")} *

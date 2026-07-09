@@ -14,7 +14,7 @@ const EmptyCard = ({ className }) => (
 
 const page = async () => {
   return (
-    <div className="flex flex-col gap-5 p-0 md:p-3 w-full">
+    <div className="flex flex-col gap-5 w-full">
       <Suspense
         fallback={
           <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
